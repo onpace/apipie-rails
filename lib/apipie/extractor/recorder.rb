@@ -42,7 +42,7 @@ module Apipie
         request, response = test_context.request, test_context.response
         @verb = request.request_method.to_sym
         @path = request.path
-        @params = request.request_parameters
+        @params = request.request_parameters.merge(request.query_parameters)
         if [:POST, :PUT, :PATCH, :DELETE].include?(@verb)
           @request_data = @params
         else
@@ -50,6 +50,7 @@ module Apipie
         end
         @response_data = parse_data(response.body)
         @code = response.code
+        @version_request = Apipie.configuration.version_request.try :call, request
       end
 
       def parse_data(data)
@@ -109,6 +110,7 @@ module Apipie
            :verb => @verb,
            :path => @path,
            :params => @params,
+           :version_request => @version_request,
            :query => @query,
            :request_data => @request_data,
            :response_data => @response_data,
