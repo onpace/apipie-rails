@@ -33,7 +33,7 @@ module Apipie
         request, response = test_context.request, test_context.response
         @verb = request.request_method.to_sym
         @path = request.path
-        @params = request.request_parameters
+        @params = request.request_parameters.merge(request.query_parameters)
         if [:POST, :PUT].include?(@verb)
           @request_data = @params
         else
