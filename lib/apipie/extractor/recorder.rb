@@ -41,10 +41,7 @@ module Apipie
         end
         @response_data = parse_data(response.body)
         @code = response.code
-        version_key = Apipie.configuration.version_in_http_accept_header
-        if version_key &&  request.env['HTTP_ACCEPT'] && request.env['HTTP_ACCEPT'].index("#{version_key}=")
-          @accept_version = request.env['HTTP_ACCEPT'].split("#{version_key}=").last
-        end
+        @version_request = Apipie.configuration.version_request.try :call, request
       end
 
       def parse_data(data)
@@ -73,7 +70,7 @@ module Apipie
            :verb => @verb,
            :path => @path,
            :params => @params,
-           :accept_version => @accept_version,
+           :version_request => @version_request,
            :query => @query,
            :request_data => @request_data,
            :response_data => @response_data,

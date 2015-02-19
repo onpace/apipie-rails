@@ -113,9 +113,8 @@ module Apipie
           recorded_examples = calls.map do |call|
             method_descriptions = Apipie.get_method_descriptions(call[:controller], call[:action])
             call[:versions] = method_descriptions.map(&:version)
-            header_key_version = Apipie.configuration.version_in_http_accept_header
-            if header_key_version && call[:accept_version]
-              call[:versions] = [call[:accept_version]]
+            if call[:version_request]
+              call[:versions] = [call[:version_request]]
             end
             if Apipie.configuration.show_all_examples
               show_in_doc = 1

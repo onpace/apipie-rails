@@ -496,8 +496,8 @@ api_base_url
 default_version
   Default API version to be used (1.0 by default)
 
-version_in_http_accept_header
-  name of the http accept header that contain the version
+version_request
+  Pass a proc in order to extract the version form the request.
 
 validate
   Parameters validation is turned off when set to false.

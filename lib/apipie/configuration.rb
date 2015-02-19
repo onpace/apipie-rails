@@ -3,7 +3,7 @@ module Apipie
 
     attr_accessor :app_name, :app_info, :copyright, :markup, :disqus_shortname,
       :api_base_url, :doc_base_url, :required_by_default, :layout,
-      :default_version, :version_in_http_accept_header,
+      :default_version, :version_request,
       :debug, :version_in_url, :namespaced_resources,
       :validate, :validate_value, :validate_presence, :authenticate, :doc_path,
       :show_all_examples, :process_params, :update_checksum, :checksum_path,
