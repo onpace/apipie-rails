@@ -41,6 +41,7 @@ module Apipie
         end
         @response_data = parse_data(response.body)
         @code = response.code
+        @version_request = Apipie.configuration.version_request.try :call, request
       end
 
       def parse_data(data)
@@ -69,6 +70,7 @@ module Apipie
            :verb => @verb,
            :path => @path,
            :params => @params,
+           :version_request => @version_request,
            :query => @query,
            :request_data => @request_data,
            :response_data => @response_data,

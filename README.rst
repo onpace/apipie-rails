@@ -496,6 +496,9 @@ api_base_url
 default_version
   Default API version to be used (1.0 by default)
 
+version_request
+  Pass a proc in order to extract the version form the request.
+
 validate
   Parameters validation is turned off when set to false.
 

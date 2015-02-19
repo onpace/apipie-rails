@@ -113,7 +113,9 @@ module Apipie
           recorded_examples = calls.map do |call|
             method_descriptions = Apipie.get_method_descriptions(call[:controller], call[:action])
             call[:versions] = method_descriptions.map(&:version)
-
+            if call[:version_request]
+              call[:versions] = [call[:version_request]]
+            end
             if Apipie.configuration.show_all_examples
               show_in_doc = 1
             elsif call[:versions].any? { |v| ! showed_in_versions.include?(v) }
